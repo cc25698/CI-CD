@@ -8,6 +8,17 @@ on: # [push] # como sera o gatilho
   paths:
     - 'projeto/**'
 
+ workflow_dispatch:
+  inputs:
+    enviroment:    
+      description: Força Bruta
+      type: choice
+      required: true
+      default: dev
+      options:
+        - web
+        - mac
+
 jobs: # trabalho a ser realizado 
   informacao_sistema:
     runs-on: ubuntu-latest
@@ -15,15 +26,15 @@ jobs: # trabalho a ser realizado
       - name: Lista o diretorio corrente
         run: ls -la
         
- compile_o_projeto:
-  runs-on: ubuntu-latest
-  defaults:
-    run:
-      working-directory: projeto
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Lista para ver se os arquivos estava
-      run: ls -Rla  
+  compile_o_projeto:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projeto
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Lista para ver se os arquivos estava
+        run: ls -Rla  
 
 
